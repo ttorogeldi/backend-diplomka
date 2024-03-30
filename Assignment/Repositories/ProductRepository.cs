@@ -6,9 +6,9 @@ namespace Assignment.Repositories
 {
     public class ProductRepository : IProductRepository
     {
-        private readonly InventoryManagementDbContext _context;
+        private readonly DatabaseContext _context;
 
-        public ProductRepository(InventoryManagementDbContext context)
+        public ProductRepository(DatabaseContext context)
         {
             _context = context;
 

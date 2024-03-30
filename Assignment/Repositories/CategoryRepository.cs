@@ -6,9 +6,9 @@ namespace Assignment.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        private readonly InventoryManagementDbContext _context;
+        private readonly DatabaseContext _context;
 
-        public CategoryRepository(InventoryManagementDbContext context)
+        public CategoryRepository(DatabaseContext context)
         {
             _context = context;
             
