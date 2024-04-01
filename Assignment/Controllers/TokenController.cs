@@ -2,10 +2,13 @@
 using Assignment.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Assignment.Controllers
 {
@@ -13,12 +16,12 @@ namespace Assignment.Controllers
     [ApiController]
     public class TokenController : ControllerBase
     {
-        public IConfiguration _configuration;
+        private readonly IConfiguration _configuration;
         private readonly DatabaseContext _context;
 
-        public TokenController(IConfiguration config, DatabaseContext context)
+        public TokenController(IConfiguration configuration, DatabaseContext context)
         {
-            _configuration = config;
+            _configuration = configuration;
             _context = context;
         }
 
@@ -51,7 +54,12 @@ namespace Assignment.Controllers
                         expires: DateTime.UtcNow.AddMinutes(10),
                         signingCredentials: signIn);
 
-                    return Ok(new JwtSecurityTokenHandler().WriteToken(token));
+                    var accessToken = new JwtSecurityTokenHandler().WriteToken(token);
+
+                    // Create an object to hold the access token
+                    var response = new { AccessToken = accessToken };
+
+                    return Ok(response);
                 }
                 else
                 {

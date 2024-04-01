@@ -19,10 +19,10 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: MyAllowSpecificOrigins,
                       policy =>
                       {
-                          policy.WithOrigins("http://localhost:4200")
-                           .AllowAnyMethod()
-                            .AllowAnyHeader()
-                            .AllowCredentials();
+                          policy.WithOrigins("http://localhost:4200", "http://localhost:3000") // Разрешенные источники
+                                .AllowAnyMethod() // Разрешить любые HTTP-методы
+                                .AllowAnyHeader() // Разрешить любые HTTP-заголовки
+                                .AllowCredentials(); // Разрешить отпр
 
                       });
 });
