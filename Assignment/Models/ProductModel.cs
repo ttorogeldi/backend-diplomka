@@ -18,8 +18,10 @@ namespace Assignment.Models
         public string ProductName { get; set; }
 
 
-        [Column("ProductDiscription", TypeName = "varchar(200)")]
-        public string ProductDiscription { get; set; }
+        [Column("Sku", TypeName = "varchar(200)")]
+        public string Sku { get; set; }
+        [Column("BarCode", TypeName = "varchar(200)")]
+        public string BarCode { get; set; }
 
         [Column("ProductPrice", TypeName = "decimal(18, 2)")]
         public decimal ProductPrice { get; set; }

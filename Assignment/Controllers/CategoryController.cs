@@ -80,11 +80,11 @@ namespace Assignment.Controllers
                 var category = await _categoryService.GetCategoryById(id);
                 if (category == null)
                 {
-                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Category not found");
+                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Категория не найдена");
                     return NotFound(notFoundResponse);
                 }
                 var result = await _categoryService.DeleteCategoryById(category);
-                GeneralResponseDTO response = new GeneralResponseDTO(true, "Product delete successfully");
+                GeneralResponseDTO response = new GeneralResponseDTO(true, "Удаление продукта прошло успешно");
                 return Ok(response);
             }
             catch (Exception ex)
@@ -103,14 +103,14 @@ namespace Assignment.Controllers
                 var category = await _categoryService.GetCategoryById(id);
                 if (category == null)
                 {
-                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Category not found");
+                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Категория не найдена");
                     return NotFound(notFoundResponse);
                 }
 
                 category.CategoryName = request.categoryName;
                 category.CategoryDescription = request.categoryDescription;
                 var result = await _categoryService.UpdateCategory(category);
-                GeneralResponseDTO response = new GeneralResponseDTO(true, "Category successfully updated");
+                GeneralResponseDTO response = new GeneralResponseDTO(true, "Категория успешно обновлена");
                 return Ok(response);
             }
             catch (Exception ex)

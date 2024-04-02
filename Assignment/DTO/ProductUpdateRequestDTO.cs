@@ -6,15 +6,11 @@ namespace Assignment.DTO
 {
     public class ProductUpdateRequestDTO
     {
-        [Required]
-        public string categoryId { get; set; }
-        [Required]
-        public string productName { get; set; }
-        [Required]
-        public string productDescription { get; set; }
-        [Required]
-        public decimal productPrice { get; set; }
-        [Required]
-        public int productQuantity { get; set; }
+        public string CategoryId { get; set; }
+        public string ProductName { get; set; }
+        public string Sku { get; set; }
+        public string BarCode { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity { get; set; }
     }
 }

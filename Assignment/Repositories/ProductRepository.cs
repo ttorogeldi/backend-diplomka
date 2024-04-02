@@ -53,7 +53,7 @@ namespace Assignment.Repositories
                                    p.ProductName,
                                    p.ProductPrice,
                                    p.ProductQuantity,
-                                   p.ProductDiscription,
+                                   p.Sku,
                                    CategoryName = p.Category.CategoryName
                                })
                                .FirstOrDefault();

@@ -24,23 +24,24 @@ namespace Assignment.Controllers
         {
             try
             {
-                var category = await _categoryService.GetCategoryById(request.categoryId);
+                var category = await _categoryService.GetCategoryById(request.CategoryId);
                 if (category == null)
                 {
-                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Category not found");
+                    GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Категория не найдена");
                     return NotFound(notFoundResponse);
                 }
                 Guid productId = Guid.NewGuid();
                 ProductModel product = new ProductModel();
                 product.ProductId = productId.ToString();
-                product.CategoryId = request.categoryId;
-                product.ProductName = request.productName;
-                product.ProductDiscription = request.productDescription;
-                product.ProductQuantity = request.productQuantity;
-                product.ProductPrice = request.productPrice;
+                product.CategoryId = request.CategoryId;
+                product.ProductName = request.ProductName;
+                product.Sku = request.Sku;
+                product.BarCode = request.BarCode;
+                product.ProductQuantity = request.ProductQuantity;
+                product.ProductPrice = request.ProductPrice;
 
                 var result = await _productService.AddProduct(product);
-                GeneralResponseDTO response = new GeneralResponseDTO(result, "Product created successfully");
+                GeneralResponseDTO response = new GeneralResponseDTO(result, "Продукт создан успешно");
                 return Created("Product created", response);
             }
             catch (Exception ex)
@@ -124,11 +125,12 @@ namespace Assignment.Controllers
                     return NotFound(notFoundResponse);
                 }
 
-                product.CategoryId = request.categoryId;
-                product.ProductName = request.productName;
-                product.ProductDiscription = request.productDescription;
-                product.ProductPrice = request.productPrice;
-                product.ProductQuantity = request.productQuantity;
+                product.CategoryId = request.CategoryId;
+                product.ProductName = request.ProductName;
+                product.Sku = request.Sku;
+                product.BarCode = request.BarCode;
+                product.ProductPrice = request.ProductPrice;
+                product.ProductQuantity = request.ProductQuantity;
 
                 var result = await _productService.UpdateProduct(product);
                 GeneralResponseDTO response = new GeneralResponseDTO(true, "Product successfully updated");

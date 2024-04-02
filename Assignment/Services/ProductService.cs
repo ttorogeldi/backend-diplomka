@@ -40,7 +40,7 @@ namespace Assignment.Services
                 foreach (var product in result) 
                 {
                     var categoryName = categoryList.Where(c => c.CategoryId == product.CategoryId).Select(c=>c.CategoryName).FirstOrDefault();
-                    var customProduct = new ProductDTO(product.ProductId,product.ProductName,product.ProductDiscription,product.ProductPrice,product.ProductQuantity,categoryName,product.CategoryId);
+                    var customProduct = new ProductDTO(product.ProductId,product.ProductName,product.Sku,product.ProductPrice,product.ProductQuantity,categoryName,product.CategoryId);
                     productDTOList.Add(customProduct);
                 }
 

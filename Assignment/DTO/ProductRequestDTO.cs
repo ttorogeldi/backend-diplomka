@@ -2,10 +2,11 @@
 {
     public class ProductRequestDTO
     {
-        public string categoryId { get; set; }
-        public string productName { get; set; }
-        public string productDescription { get; set; }
-        public decimal productPrice { get; set; }
-        public int productQuantity { get; set; }
+        public string CategoryId { get; set; }
+        public string ProductName { get; set; }
+        public string Sku { get; set; }
+        public string BarCode { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity { get; set; }
     }
 }

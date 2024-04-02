@@ -4,6 +4,7 @@ using Assignment.DataBaseAccess;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20240402155250_product-and-category")]
+    partial class productandcategory
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,15 +105,15 @@ namespace Assignment.Migrations
                         .HasColumnType("nvarchar(36)")
                         .HasColumnName("ProductId");
 
-                    b.Property<string>("BarCode")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("BarCode");
-
                     b.Property<string>("CategoryId")
                         .IsRequired()
                         .HasColumnType("nvarchar(36)")
                         .HasColumnName("CategoryId");
+
+                    b.Property<string>("ProductDiscription")
+                        .IsRequired()
+                        .HasColumnType("varchar(200)")
+                        .HasColumnName("ProductDiscription");
 
                     b.Property<string>("ProductName")
                         .IsRequired()
@@ -124,11 +127,6 @@ namespace Assignment.Migrations
                     b.Property<int>("ProductQuantity")
                         .HasColumnType("int")
                         .HasColumnName("ProductQuantity");
-
-                    b.Property<string>("Sku")
-                        .IsRequired()
-                        .HasColumnType("varchar(200)")
-                        .HasColumnName("Sku");
 
                     b.HasKey("ProductId");
 
