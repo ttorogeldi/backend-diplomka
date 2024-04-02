@@ -1,88 +1,103 @@
-﻿using Assignment.Interfaces;
+﻿using Assignment.DTO;
+using Assignment.Interfaces;
 using Assignment.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using System;
+using System.Threading.Tasks;
 
 namespace Assignment.Controllers
 {
-    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class EmployeeController : ControllerBase
     {
-        private readonly IEmployees _IEmployee;
+        private readonly IEmployees _employeeService;
 
-        public EmployeeController(IEmployees IEmployee)
+        public EmployeeController(IEmployees employeeService)
         {
-            _IEmployee = IEmployee;
+            _employeeService = employeeService;
         }
 
-        // GET: api/employee>
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Employee>>> Get()
+        public async Task<IActionResult> GetAllEmployees()
         {
-            return await Task.FromResult(_IEmployee.GetEmployeeDetails());
-        }
-
-        // GET api/employee/5
-
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Employee>> Get(int id)
-        {
-            var employees = await Task.FromResult(_IEmployee.GetEmployeeDetails(id));
-            if (employees == null)
-            {
-                return NotFound();
-            }
-            return employees;
-        }
-
-        // POST api/employee
-        [HttpPost]
-        public async Task<ActionResult<Employee>> Post(Employee employee)
-        {
-            _IEmployee.AddEmployee(employee);
-            return await Task.FromResult(employee);
-        }
-
-        // PUT api/employee/5
-        [HttpPut("{id}")]
-        public async Task<ActionResult<Employee>> Put(int id, Employee employee)
-        {
-            if (id != employee.EmployeeID)
-            {
-                return BadRequest();
-            }
             try
             {
-                _IEmployee.UpdateEmployee(employee);
+                var employees = _employeeService.GetEmployeeDetails();
+                return Ok(new GeneralResponseDTO(true, "Employees retrieved successfully", employees));
             }
-            catch (DbUpdateConcurrencyException)
+            catch (Exception ex)
             {
-                if (!EmployeeExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return StatusCode(500, new GeneralResponseDTO(false, ex.Message));
             }
-            return await Task.FromResult(employee);
         }
 
-        // DELETE api/employee/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetEmployeeById(int id)
+        {
+            try
+            {
+                var employee = _employeeService.GetEmployeeDetails(id);
+                if (employee == null)
+                {
+                    return NotFound(new GeneralResponseDTO(false, "Employee not found"));
+                }
+                return Ok(new GeneralResponseDTO(true, "Employee retrieved successfully", employee));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new GeneralResponseDTO(false, ex.Message));
+            }
+        }
+
+        [HttpPost]
+        public IActionResult AddEmployee(Employee employee)
+        {
+            try
+            {
+                _employeeService.AddEmployee(employee);
+                return CreatedAtAction(nameof(GetEmployeeById), new { id = employee.EmployeeID }, new GeneralResponseDTO(true, "Employee added successfully", employee));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new GeneralResponseDTO(false, ex.Message));
+            }
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult UpdateEmployee(int id, Employee employee)
+        {
+            try
+            {
+                if (id != employee.EmployeeID)
+                {
+                    return BadRequest(new GeneralResponseDTO(false, "Invalid employee ID"));
+                }
+                _employeeService.UpdateEmployee(employee);
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new GeneralResponseDTO(false, ex.Message));
+            }
+        }
+
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Employee>> Delete(int id)
+        public IActionResult DeleteEmployee(int id)
         {
-            var employee = _IEmployee.DeleteEmployee(id);
-            return await Task.FromResult(employee);
-        }
-
-        private bool EmployeeExists(int id)
-        {
-            return _IEmployee.CheckEmployee(id);
+            try
+            {
+                var employee = _employeeService.DeleteEmployee(id);
+                if (employee == null)
+                {
+                    return NotFound(new GeneralResponseDTO(false, "Employee not found"));
+                }
+                return Ok(new GeneralResponseDTO(true, "Employee deleted successfully", employee));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new GeneralResponseDTO(false, ex.Message));
+            }
         }
     }
 }
