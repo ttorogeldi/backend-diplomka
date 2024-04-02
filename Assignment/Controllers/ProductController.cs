@@ -20,7 +20,7 @@ namespace Assignment.Controllers
         }
 
         [HttpPost("add-product", Name = "AddProduct")]
-        public async Task<IActionResult> AddProduct(ProductRequestDTO request)
+        public async Task<IActionResult> AddProduct(ProductDTO request)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Assignment.Controllers
         }
 
         [HttpPut("update-product/{id}", Name = ("UpdateProduct"))]
-        public async Task<IActionResult> UpdateProduct(ProductUpdateRequestDTO request,string id)
+        public async Task<IActionResult> UpdateProduct(ProductDTO request,string id)
         {
             try
             {

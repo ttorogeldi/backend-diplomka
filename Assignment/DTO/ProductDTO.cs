@@ -1,24 +1,31 @@
-﻿namespace Assignment.DTO
+﻿using Assignment.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Assignment.DTO
 {
     public class ProductDTO
     {
-        public string productId { get; set; }
-        public string productName { get; set; }
-        public string productDescription { get; set; }
-        public decimal productPrice { get; set; }
-        public int productQuantity { get; set; }
-        public string categoryName { get; set; }
-        public string categoryId { get; set; }
 
-        public ProductDTO(string productId, string productName, string productDescription, decimal productPrice, int productQuantity, string categoryName, string categoryId)
+        public string ProductId { get; set; }
+        public string CategoryId { get; set; }
+        public string CategoryName { get; set; }
+        public string ProductName { get; set; }
+        public string Sku { get; set; }
+        public string BarCode { get; set; }
+        public decimal ProductPrice { get; set; }
+        public int ProductQuantity { get; set; }
+
+        public ProductDTO(string productId, string productName, string sku, string barCode, decimal productPrice, int productQuantity, string categoryName, string categoryId)
         {
-            this.productId = productId;
-            this.productName = productName;
-            this.productDescription = productDescription;
-            this.productPrice = productPrice;
-            this.productQuantity = productQuantity;
-            this.categoryName = categoryName;
-            this.categoryId = categoryId;
+            this.ProductId = productId;
+            this.ProductName = productName;
+            this.Sku = sku;
+            this.BarCode = barCode;
+            this.ProductPrice = productPrice;
+            this.ProductQuantity = productQuantity;
+            this.CategoryName = categoryName;
+            this.CategoryId = categoryId;
         }
 
     }
