@@ -1,24 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Learning\\Toras\\backend-diplomka\\Assignment\\Assignment.csproj": {}
+    "D:\\DIPLOMKA\\backend-diplomka\\Assignment\\Assignment.csproj": {}
   },
   "projects": {
-    "D:\\Learning\\Toras\\backend-diplomka\\Assignment\\Assignment.csproj": {
+    "D:\\DIPLOMKA\\backend-diplomka\\Assignment\\Assignment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Learning\\Toras\\backend-diplomka\\Assignment\\Assignment.csproj",
+        "projectUniqueName": "D:\\DIPLOMKA\\backend-diplomka\\Assignment\\Assignment.csproj",
         "projectName": "Assignment",
-        "projectPath": "D:\\Learning\\Toras\\backend-diplomka\\Assignment\\Assignment.csproj",
-        "packagesPath": "C:\\Users\\ttologonov\\.nuget\\packages\\",
-        "outputPath": "D:\\Learning\\Toras\\backend-diplomka\\Assignment\\obj\\",
+        "projectPath": "D:\\DIPLOMKA\\backend-diplomka\\Assignment\\Assignment.csproj",
+        "packagesPath": "C:\\Users\\Torogeldi Tologonov\\.nuget\\packages\\",
+        "outputPath": "D:\\DIPLOMKA\\backend-diplomka\\Assignment\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+          "D:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages",
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\ttologonov\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Users\\Torogeldi Tologonov\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -28,8 +30,7 @@
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "C:\\Program Files\\dotnet\\library-packs": {},
-          "D:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
-          "http://bg-baget.dmz.lan/v3/index.json": {},
+          "D:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -63,21 +64,21 @@
             },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Microsoft.EntityFrameworkCore.Tools": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
               "target": "Package",
-              "version": "[8.0.2, )"
+              "version": "[8.0.3, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.4.0, )"
+              "version": "[6.5.0, )"
             }
           },
           "imports": [
@@ -99,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.203/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

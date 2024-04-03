@@ -53,7 +53,7 @@ namespace Assignment.Services
             }
         }
 
-        public async Task<object> GetProductById(string id)
+        public async Task<object> GetProductById(int id)
         {
             try
             {
@@ -67,7 +67,7 @@ namespace Assignment.Services
             }
         }
 
-        public async Task<ProductModel> GetProductByIdInternal(string id)
+        public async Task<ProductModel> GetProductByIdInternal(int id)
         {
             try
             {

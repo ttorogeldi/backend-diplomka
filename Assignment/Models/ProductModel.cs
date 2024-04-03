@@ -6,8 +6,8 @@ namespace Assignment.Models
     public class ProductModel
     {
         [Key]
-        [Column("ProductId",TypeName ="nvarchar(36)")]
-        public string ProductId { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int ProductId { get; set; }    
 
         [Column("CategoryId",TypeName ="nvarchar(36)")]
         public string CategoryId { get; set; }

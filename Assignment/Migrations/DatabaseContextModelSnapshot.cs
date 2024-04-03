@@ -17,10 +17,27 @@ namespace Assignment.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.2")
+                .HasAnnotation("ProductVersion", "8.0.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+
+            modelBuilder.Entity("Assignment.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
 
             modelBuilder.Entity("Assignment.Models.Employee", b =>
                 {
@@ -70,7 +87,12 @@ namespace Assignment.Migrations
                         .IsUnicode(false)
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<int>("WarehouseBranchId")
+                        .HasColumnType("int");
+
                     b.HasKey("EmployeeID");
+
+                    b.HasIndex("WarehouseBranchId");
 
                     b.ToTable("Employee", (string)null);
                 });
@@ -98,9 +120,11 @@ namespace Assignment.Migrations
 
             modelBuilder.Entity("Assignment.Models.ProductModel", b =>
                 {
-                    b.Property<string>("ProductId")
-                        .HasColumnType("nvarchar(36)")
-                        .HasColumnName("ProductId");
+                    b.Property<int>("ProductId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ProductId"));
 
                     b.Property<string>("BarCode")
                         .IsRequired()
@@ -169,6 +193,65 @@ namespace Assignment.Migrations
                     b.ToTable("UserInfo", (string)null);
                 });
 
+            modelBuilder.Entity("Assignment.Models.WarehouseBranch", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("WarehouseBranchId");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.ToTable("WarehouseBranch", (string)null);
+                });
+
+            modelBuilder.Entity("Assignment.Models.WarehouseInventory", b =>
+                {
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("WarehouseBranchId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WarehouseBranchId");
+
+                    b.ToTable("WarehouseInventory", (string)null);
+                });
+
+            modelBuilder.Entity("Assignment.Models.Employee", b =>
+                {
+                    b.HasOne("Assignment.Models.WarehouseBranch", "WarehouseBranch")
+                        .WithMany("Employees")
+                        .HasForeignKey("WarehouseBranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("WarehouseBranch");
+                });
+
             modelBuilder.Entity("Assignment.Models.ProductModel", b =>
                 {
                     b.HasOne("Assignment.Models.ProductCategoryModel", "Category")
@@ -180,9 +263,46 @@ namespace Assignment.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("Assignment.Models.WarehouseBranch", b =>
+                {
+                    b.HasOne("Assignment.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("Assignment.Models.WarehouseInventory", b =>
+                {
+                    b.HasOne("Assignment.Models.ProductModel", "Product")
+                        .WithMany()
+                        .HasForeignKey("Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Assignment.Models.WarehouseBranch", "WarehouseBranch")
+                        .WithMany("WarehouseInventories")
+                        .HasForeignKey("WarehouseBranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Product");
+
+                    b.Navigation("WarehouseBranch");
+                });
+
             modelBuilder.Entity("Assignment.Models.ProductCategoryModel", b =>
                 {
                     b.Navigation("Products");
+                });
+
+            modelBuilder.Entity("Assignment.Models.WarehouseBranch", b =>
+                {
+                    b.Navigation("Employees");
+
+                    b.Navigation("WarehouseInventories");
                 });
 #pragma warning restore 612, 618
         }

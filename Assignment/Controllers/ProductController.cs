@@ -30,9 +30,7 @@ namespace Assignment.Controllers
                     GeneralResponseDTO notFoundResponse = new GeneralResponseDTO(false, "Категория не найдена");
                     return NotFound(notFoundResponse);
                 }
-                Guid productId = Guid.NewGuid();
                 ProductModel product = new ProductModel();
-                product.ProductId = productId.ToString();
                 product.CategoryId = request.CategoryId;
                 product.ProductName = request.ProductName;
                 product.Sku = request.Sku;
@@ -69,7 +67,7 @@ namespace Assignment.Controllers
         }
 
         [HttpGet("get-product-by-id/{id}", Name = ("GettProductById"))]
-        public async Task<IActionResult> GetProductById(string id)
+        public async Task<IActionResult> GetProductById(int id)
         {
             try
             {
@@ -91,7 +89,7 @@ namespace Assignment.Controllers
         }
 
         [HttpDelete("delete-product-by-id/{id}", Name = ("DeleteProductById"))]
-        public async Task<IActionResult> DeleteProductById(string id)
+        public async Task<IActionResult> DeleteProductById(int id)
         {
             try
             {
@@ -114,7 +112,7 @@ namespace Assignment.Controllers
         }
 
         [HttpPut("update-product/{id}", Name = ("UpdateProduct"))]
-        public async Task<IActionResult> UpdateProduct(ProductDTO request,string id)
+        public async Task<IActionResult> UpdateProduct(ProductDTO request, int id)
         {
             try
             {

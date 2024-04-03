@@ -9,6 +9,6 @@ namespace Assignment.DTO
         [Required]
         public string categoryName { get; set; }
         [Required]
-        public string categoryDescription { get; set; }
+        public string? categoryDescription { get; set; }
     }
 }

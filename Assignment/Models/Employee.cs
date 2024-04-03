@@ -21,5 +21,8 @@
         public Guid? RowGuid { get; set; }
 
         public DateTime ModifiedDate { get; set; }
+
+        public int WarehouseBranchId { get; set; } // Внешний ключ к филиалу
+        public WarehouseBranch WarehouseBranch { get; set; } // Навигационное свойство к филиалу
     }
 }
